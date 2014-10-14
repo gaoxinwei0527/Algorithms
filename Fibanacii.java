@@ -4,6 +4,8 @@ A. can be spilt into several numbers;
 B. The first two number are the same, the next number is equal to the sum of previous two
 eg. 112 (2 = 1 + 1), 12,122,436(12 + 12 = 24, 12 + 24 = 36)
 If you are given a range by the user, print all numbers that are Fibonacci number in the range.
+
+Complexity: O(m*n)
 */
 
 import java.util.ArrayList;
