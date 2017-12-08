@@ -1,5 +1,8 @@
 package LeetCode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  89. Gray Code
 
@@ -21,4 +24,23 @@ package LeetCode;
  For now, the judge is able to judge based on one instance of gray code sequence. Sorry about that.
  */
 public class H_Leetcode_89 {
+    /**
+     * @param n
+     * @return
+     *
+     * simple formula way
+     *
+     * Time - O(2 ^ n)
+     * Space - O(2 ^ n)
+     */
+    public List<Integer> grayCode(int n) {
+        List<Integer> res = new ArrayList<>();
+        int k = 1 << n;
+        res.add(0);
+        for(int i = 1; i < k; i++){
+            res.add(i ^ (i / 2));
+        }
+
+        return res;
+    }
 }
