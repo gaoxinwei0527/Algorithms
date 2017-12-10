@@ -1,5 +1,9 @@
 package LeetCode;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
 /**
  94. Binary Tree Inorder Traversal
 
@@ -17,4 +21,39 @@ package LeetCode;
  Note: Recursive solution is trivial, could you do it iteratively?
  */
 public class L_Leetcode_94 {
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
+
+    /**
+     * @param root
+     * @return
+     *
+     * Use stack
+     *
+     * Time & space - O(n)
+     */
+    public List<Integer> inorderTraversal(TreeNode root) {
+        Stack<TreeNode> st = new Stack<>();
+        while(root != null){
+            st.push(root);
+            root = root.left;
+        }
+
+        List<Integer> res = new ArrayList<>();
+        while(!st.isEmpty()){
+            TreeNode next = st.pop();
+            res.add(next.val);
+            TreeNode right = next.right;
+            while(right != null){
+                st.push(right);
+                right = right.left;
+            }
+        }
+
+        return res;
+    }
 }
