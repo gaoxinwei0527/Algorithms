@@ -21,4 +21,44 @@ package LeetCode;
  -10  5
  */
 public class L_Leetcode_109 {
+    public class ListNode {
+        int val;
+        ListNode next;
+        ListNode(int x) { val = x; }
+    }
+
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
+
+    /**
+     * @param head
+     * @return
+     *
+     * recursive way
+     */
+    public TreeNode sortedListToBST(ListNode head) {
+        if(head == null) return null;
+        if(head.next == null) return new TreeNode(head.val);
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode pre = dummy;
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while(fast.next != null && fast.next.next != null){
+            slow = slow.next;
+            pre = pre.next;
+            fast = fast.next.next;
+        }
+
+        TreeNode root = new TreeNode(slow.val);
+        pre.next = null;
+        root.left = sortedListToBST(dummy.next);
+        root.right = sortedListToBST(slow.next);
+        return root;
+    }
 }
