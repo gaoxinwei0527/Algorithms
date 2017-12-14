@@ -1,5 +1,7 @@
 package LeetCode;
 
+import java.util.Stack;
+
 /**
  114. Flatten Binary Tree to Linked List
 
@@ -27,4 +29,28 @@ package LeetCode;
  6
  */
 public class M_Leetcode_114 {
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
+
+    /**
+     * @param root
+     *
+     * preorder traverse
+     */
+    public void flatten(TreeNode root) {
+        if(root == null) return;
+        Stack<TreeNode> st = new Stack<>();
+        st.push(root);
+        while(!st.isEmpty()){
+            TreeNode next = st.pop();
+            if(next.right != null) st.push(next.right);
+            if(next.left != null) st.push(next.left);
+            next.left = null;
+            next.right = st.isEmpty() ? null : st.peek();
+        }
+    }
 }

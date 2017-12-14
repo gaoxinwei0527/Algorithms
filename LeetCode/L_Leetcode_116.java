@@ -1,5 +1,8 @@
 package LeetCode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  116. Populating Next Right Pointers in Each Node
 
@@ -33,4 +36,30 @@ package LeetCode;
  4->5->6->7 -> NULL
  */
 public class L_Leetcode_116 {
+    public class TreeLinkNode {
+        int val;
+        TreeLinkNode left, right, next;
+        TreeLinkNode(int x) { val = x; }
+    }
+
+    /**
+     * @param root
+     *
+     * level order traverse
+     */
+    public void connect(TreeLinkNode root) {
+        if(root == null) return;
+        List<TreeLinkNode> level = new ArrayList<>();
+        level.add(root);
+        while(!level.isEmpty()){
+            List<TreeLinkNode> next = new ArrayList<>();
+            for(int i = 0; i < level.size(); i++){
+                TreeLinkNode n = level.get(i);
+                if(n.left != null) next.add(n.left);
+                if(n.right != null) next.add(n.right);
+                n.next = (i == level.size() - 1 ? null : level.get(i + 1));
+            }
+            level = next;
+        }
+    }
 }
