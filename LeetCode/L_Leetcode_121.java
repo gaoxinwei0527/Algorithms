@@ -19,4 +19,18 @@ package LeetCode;
  In this case, no transaction is done, i.e. max profit = 0.
  */
 public class L_Leetcode_121 {
+    /**
+     * @param prices
+     * @return
+     */
+    public int maxProfit(int[] prices) {
+        if(prices.length < 2) return 0;
+        int min = prices[0];
+        int res = 0;
+        for(int i = 1; i < prices.length; i++){
+            res = Math.max(res, prices[i] - min);
+            min = Math.min(min, prices[i]);
+        }
+        return res;
+    }
 }
