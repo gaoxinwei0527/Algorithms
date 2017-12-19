@@ -15,4 +15,19 @@ package LeetCode;
  For the purpose of this problem, we define empty string as valid palindrome.
  */
 public class L_Leetcode_125 {
+    /**
+     * @param s
+     * @return
+     *
+     * Time - O(n)
+     */
+    public boolean isPalindrome(String s) {
+        char[] arr = s.replaceAll("\\s+", "").toLowerCase().replaceAll("[^0-9a-z]", "").toCharArray();
+        int i = 0;
+        int j = arr.length - 1;
+        while(i < j){
+            if(arr[i++] != arr[j--]) return false;
+        }
+        return true;
+    }
 }
