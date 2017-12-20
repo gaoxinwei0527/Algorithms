@@ -1,5 +1,10 @@
 package LeetCode;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  133. Clone Graph
 
@@ -27,4 +32,28 @@ package LeetCode;
  \_/
  */
 public class L_Leetcode_133 {
+    class UndirectedGraphNode {
+        int label;
+        List<UndirectedGraphNode> neighbors;
+        UndirectedGraphNode(int x) { label = x; neighbors = new ArrayList<UndirectedGraphNode>(); }
+    };
+
+    Map<Integer, UndirectedGraphNode> map = new HashMap<>();
+
+    /**
+     * @param node
+     * @return
+     *
+     * use hash map to store cloned nodes.
+     */
+    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
+        if(node == null) return null;
+        if(map.containsKey(node.label)) return map.get(node.label);
+        UndirectedGraphNode cloned = new UndirectedGraphNode(node.label);
+        map.put(node.label, cloned);
+        for(UndirectedGraphNode neighbor : node.neighbors){
+            cloned.neighbors.add(cloneGraph(neighbor));
+        }
+        return cloned;
+    }
 }
