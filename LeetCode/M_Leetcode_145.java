@@ -5,22 +5,22 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- 144. Binary Tree Preorder Traversal
+ 145. Binary Tree Postorder Traversal
 
- Given a binary tree, return the preorder traversal of its nodes' values.
+ Given a binary tree, return the postorder traversal of its nodes' values.
 
  For example:
- Given binary tree [1,null,2,3],
+ Given binary tree {1,#,2,3},
  1
  \
  2
  /
  3
- return [1,2,3].
+ return [3,2,1].
 
  Note: Recursive solution is trivial, could you do it iteratively?
  */
-public class L_Leetcode_144 {
+public class M_Leetcode_145 {
     public class TreeNode {
         int val;
         TreeNode left;
@@ -32,28 +32,23 @@ public class L_Leetcode_144 {
      * @param root
      * @return
      *
-     * Iterative way, use stack
+     * iterative way using stack. basically keep the nodes in stack in order of root -> right->left, which is reverse order of post order
+     * then every time we pop out a node, we insert it to start of the result list.
      *
-     * Time - O(n)
+     * Time - O(n ^ 2), insert val to start of list requires shift
      * Space - O(n)
      */
-    public List<Integer> preorderTraversal(TreeNode root) {
+    public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<>();
-        Stack<TreeNode> st = new Stack<>();
-        while(root != null){
-            res.add(root.val);
-            st.push(root);
-            root = root.left;
-        }
+        if(root == null) return res;
 
+        Stack<TreeNode> st = new Stack<>();
+        st.push(root);
         while(!st.isEmpty()){
             TreeNode next = st.pop();
-            TreeNode right = next.right;
-            while(right != null){
-                res.add(right.val);
-                st.push(right);
-                right = right.left;
-            }
+            res.add(0, next.val);
+            if(next.left != null) st.push(next.left);
+            if(next.right != null) st.push(next.right);
         }
 
         return res;
@@ -65,7 +60,7 @@ public class L_Leetcode_144 {
      *
      * recursive way
      */
-    public List<Integer> preorderTraversal2(TreeNode root) {
+    public List<Integer> postorderTraversal2(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         helper(root, res);
         return res;
@@ -73,8 +68,8 @@ public class L_Leetcode_144 {
 
     private void helper(TreeNode root, List<Integer> res){
         if(root == null) return;
-        res.add(root.val);
         helper(root.left, res);
         helper(root.right, res);
+        res.add(root.val);
     }
 }
