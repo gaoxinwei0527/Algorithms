@@ -13,4 +13,12 @@ package LeetCode;
  For C programmers: Try to solve it in-place in O(1) space.
  */
 public class L_Leetcode_151 {
+    public String reverseWords(String s) {
+        String[] words = s.split("\\s+");
+        StringBuilder sb = new StringBuilder();
+        for(int i = words.length - 1; i >= 0; i--){
+            sb.append(words[i]).append(" ");
+        }
+        return sb.toString().trim();
+    }
 }
