@@ -13,4 +13,33 @@ package LeetCode;
  The read function will only be called once for each test case.
  */
 public class L_Leetcode_157 {
+    class Reader4{
+        /* The read4 API is defined in the parent class Reader4.*/
+        int read4(char[] buf){return 0;}
+    }
+
+    public class Solution extends Reader4 {
+        /**
+         * @param buf Destination buffer
+         * @param n   Maximum number of characters to read
+         * @return    The number of characters read
+         *
+         * the description is not very clear, we need to call read4(char[] buf) with a tmp array, then do array copy to the dest array.
+         *
+         */
+        public int read(char[] buf, int n) {
+            int total = 0;
+            boolean eof = false;
+            while(total < n && !eof){
+                char[] tmp = new char[4];
+                int next = read4(tmp);
+                eof = (next != 4);
+                int len = ((n - total) < next ? (n - total) : next);
+                System.arraycopy(tmp, 0, buf, total, len);
+                total += len;
+            }
+
+            return total;
+        }
+    }
 }
