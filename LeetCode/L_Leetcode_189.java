@@ -18,4 +18,27 @@ package LeetCode;
  Special thanks to @Freezen for adding this problem and creating all test cases.
  */
 public class L_Leetcode_189 {
+    /**
+     * @param nums
+     * @param k
+     *
+     * use another array to store result.
+     *
+     * Time - O(n)
+     */
+    public void rotate(int[] nums, int k) {
+        int n = nums.length;
+        if(n <= 1) return;
+        k %= n;
+        int[] res = new int[nums.length];
+        for(int i = 0; i < k; i++){
+            res[i] = nums[n - k + i];
+        }
+
+        for(int i = k; i < n; i++){
+            res[i] = nums[i - k];
+        }
+
+        System.arraycopy(res, 0, nums, 0, n);
+    }
 }
