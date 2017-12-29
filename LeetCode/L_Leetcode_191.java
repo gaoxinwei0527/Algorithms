@@ -11,4 +11,20 @@ package LeetCode;
  Special thanks to @ts for adding this problem and creating all test cases.
  */
 public class L_Leetcode_191 {
+    /**
+     * @param n
+     * @return
+     *
+     * n & (-n) could extract the right most 1 of n
+     * n & 0x00000000ffffffffL would convert signed integer n to unsigned int (with long type)
+     */
+    public int hammingWeight(int n) {
+        long x = ((long)n & 0x00000000ffffffffL);
+        int res = 0;
+        while(x > 0){
+            x -= (x & (-x));
+            res++;
+        }
+        return res;
+    }
 }
