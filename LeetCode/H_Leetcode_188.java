@@ -22,41 +22,39 @@ public class H_Leetcode_188 {
      * dp - O(nk)
      */
     public int maxProfit(int k, int[] prices) {
-        if(prices.length < 2) return 0;
+        int n = prices.length;
+        if(n < 2) return 0;
 
         /* if k >= prices.length - 1, it becomes unlimited transaction actually*/
-        if(prices.length <= k + 1){
+        if(k >= n) {
             int res = 0;
-            for(int i = 1; i < prices.length; i++){
+            for(int i = 1; i < n; i++){
                 if(prices[i] > prices[i - 1]) res += (prices[i] - prices[i - 1]);
             }
             return res;
         }
 
-        // dp[i][k][0] means max profit at ith day without stock and at most k transactions
-        // dp[i][k][1] means max profit at ith day with stock and at most k transactions
-        int[][][] dp = new int[prices.length + 1][k + 1][2];
+        // dp[i][j][0] means max profit at the end of day i without stock and with at most j transactions
+        // dp[i][j][1] means max profit at the end of day i with stock and with at most j transactions
+        int[][][] dp = new int[n][k + 1][2];
 
-        // dp[0][k][0] should all be 0, because no transaction will happened even before day 1
-        // dp[0][k][1] should all be Integer.MIN_VALUE, because it's impossible we have stock on day 0
-        for(int i = 0; i <= k; i++){
+        // at day 0, no stock means no transaction, thus max profit is 0.
+        // has stock means just bought stock on day 0, thus max profit is -prices[0];
+        for(int i = 1; i <= k; i++){
             dp[0][i][0] = 0;
-            dp[0][i][1] = Integer.MIN_VALUE;
+            dp[0][i][1] = -prices[0];
         }
 
         // when we do the iteration
-        // dp[i][0][0] is anyway 0, because no transaction happened
-        // dp[i][0][1] is anyway Integer.MIN_VALUE, because it's impossible
-        // dp[i][k][0] = Math.max(dp[i - 1][k][0], dp[i - 1][k][1] + prices[i - 1]); // rest or sell on day i
-        // dp[i][k][1] = Math.max(dp[i - 1][k][1], dp[i - 1][k - 1][0] - prices[i - 1]); // rest or buy on day i
-        for(int i = 1; i <= prices.length; i++){
-            dp[i][0][0] = 0;
-            dp[i][0][1] = Integer.MIN_VALUE;
+        // dp[i][j][0] = Math.max(dp[i - 1][j][0], dp[i - 1][j][1] + prices[i]); // rest or sell on day i
+        // dp[i][j][1] = Math.max(dp[i - 1][j][1], dp[i - 1][j - 1][0] - prices[i]); // rest or buy on day i
+        for(int i = 1; i < n; i++){
             for(int j = 1; j <= k; j++){
-                dp[i][j][0] = Math.max(dp[i - 1][j][0], dp[i - 1][j][1] + prices[i - 1]);
-                dp[i][j][1] = Math.max(dp[i - 1][j][1], dp[i - 1][j - 1][0] - prices[i - 1]);
+                dp[i][j][0] = Math.max(dp[i - 1][j][0], dp[i - 1][j][1] + prices[i]);
+                dp[i][j][1] = Math.max(dp[i - 1][j][1], dp[i - 1][j - 1][0] - prices[i]);
             }
         }
-        return dp[prices.length][k][0];
+
+        return dp[n - 1][k][0];
     }
 }
