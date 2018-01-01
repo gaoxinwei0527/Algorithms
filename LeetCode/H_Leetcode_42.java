@@ -49,4 +49,46 @@ public class H_Leetcode_42 {
 
         return res;
     }
+
+    /**
+     * @param height
+     * @return
+     *
+     * 木桶原理
+     * This is a way inspired by trap rain water II, only need one pass traverse.
+     * in trap rain water II, we use priority queue to store current defending walls to get the shortest wall.
+     * in this case, it's doing the same thing, but we don't need a queue, because it's 2-D, so we would always only have 2 walls.
+     *
+     * initially, the walls l & r would be index 0 & n - 1.
+     * we detect the shortest wall (bottleneck) by compare l and r, whichever shorter moves.
+     *
+     * E.g. l < r, we move l, but before we really moves l, we need to process all l's shorter neighbors. This is exactly same as trap water II.
+     * Just like the water level is at l's height, then l's shorter neighbors will be overwhelmed, if l's neighbor is higher, then it will become a new wall.
+     *
+     * say for index in [l + 1, l + k], they all shorter then l, then we do res += (h[l] - h[l + 1]), res += (h[l] - h[l + 2])..etc, cause l is shortest outer wall now.
+     * all other walls in queue (only r in this case) are higher than l.
+     */
+    public int trap2(int[] height) {
+        int l = 0;
+        int r = height.length - 1;
+        int res = 0;
+        while(r - l > 1){ // if l & r are adjacent, then they could not trap any more water
+            if(height[l] > height[r]){
+                int k = r - 1;
+                while(height[k] < height[r]){
+                    res += (height[r] - height[k]);
+                    k--;
+                }
+                r = k;
+            }else{
+                int k = l + 1;
+                while(height[k] < height[l]){
+                    res += (height[l] - height[k]);
+                    k++;
+                }
+                l = k;
+            }
+        }
+        return res;
+    }
 }
