@@ -182,4 +182,21 @@ public class H_Solution_28_214 {
         }
         return match;
     }
+
+    /**
+     * @param s
+     * @return
+     *
+     * best solution, not fully understand yet.
+     */
+    public String shortestPalindrome3(String s) {
+        int j = 0;
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if (s.charAt(i) == s.charAt(j)) { j += 1; }
+        }
+
+        if (j == s.length()) { return s; }
+        String suffix = s.substring(j);
+        return new StringBuffer(suffix).reverse().toString() + shortestPalindrome3(s.substring(0, j)) + suffix;
+    }
 }
