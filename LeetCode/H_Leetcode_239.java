@@ -46,6 +46,10 @@ public class H_Leetcode_239 {
      * because we don't need indexes x with nums[x] <= nums[i] && x < i, they won't have impact on the window max, at the worst, we would pick nums[i] as max instead of them)
      * 3. the indexes k in deque have descending order based upon nums[k]. (same as above point, former one in ascending order won't have impact on window max)
      *
+     * This way can also solve the fixed sliding window minimal problem. We only need to keep the index sequence in deque in ascending order based upon nums value.
+     * And the last index in deque is current processing index.
+     * It may also be used to solve other fixed sliding window problems.
+     *
      * Time - O(n)
      * Space - O(k)
      */
