@@ -38,4 +38,59 @@ package LeetCode;
  Explanation: "abbbabbbc" occurs twice, but "abbbabbbc" can also be encoded to "2[abbb]c", so one answer can be "
  */
 public class H_Leetcode_471 {
+    /**
+     * @param s
+     * @return
+     *
+     * subproblem S(i, j)-
+     * means the shortest encoded string for s[i, j];
+     *
+     * initialize- S(i, j) = s.substring(i, j + 1)
+     *
+     * recurrence-
+     * foreach x in [i, j)
+     *     // if S(i, j) is concatenate of S(i, x) and S(x + 1, j)
+     *     S(i, j) = min (S(i, x) + S(x + 1, j), S(i, j));
+     *
+     *     // if S(i, j) is repeat pattern of S(i, x)
+     *     S(i, j) = min (repeat(S(i, x)), S(i, j));
+     *
+     * Original problem - S(0, n - 1);
+     * bottom up - dp[i][j] stores the result for S(i, j)
+     *
+     * normally if we model subproblem as substring problem like S(i, j), then it most likely depends on following subproblems-
+     * 1. S(i + 1, j)
+     * 2. S(i, j - 1)
+     * 3. S(i, k) + S(k + 1, j)
+     *
+     * And for problems, S(i, j) not just depends on results of subproblems, but also the original input[i, j],
+     * it could also generate part of the local optimized result.
+     */
+    public String encode(String s) {
+        int n = s.length();
+        if(n <= 4) return s;
+        String[][] dp = new String[n][n];
+        for(int len = 1; len <= n; len++){
+            for(int i = 0; i + len <= n; i++){
+                int j = i + len - 1;
+                String sub = s.substring(i, j + 1);
+                dp[i][j] = sub;
+                if(len <= 4) continue;
+
+                for(int k = i; k < j; k++){
+                    String append = dp[i][k] + dp[k + 1][j];
+                    if(dp[i][j].length() > append.length()) dp[i][j] = append;
+
+                    int sub_len = k - i + 1;
+                    String pattern = s.substring(i, k + 1);
+                    if(len % sub_len == 0 && "".equals(sub.replaceAll(pattern, ""))){
+                        String repeat = "" + (len / sub_len) + "[" + dp[i][k] + "]";
+                        if(dp[i][j].length() > repeat.length()) dp[i][j] = repeat;
+                    }
+                }
+            }
+        }
+
+        return dp[0][n - 1];
+    }
 }
