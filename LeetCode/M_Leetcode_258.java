@@ -16,4 +16,15 @@ package LeetCode;
  Special thanks to @jianchao.li.fighter for adding this problem and creating all test cases.
  */
 public class M_Leetcode_258 {
+    /**
+     * @param num
+     * @return
+     *
+     * calculate digital root, if %9 != 0, return %9, otherwise return 9.
+     */
+    public int addDigits(int num) {
+        if(num < 10) return num;
+        if(num % 9 == 0) return 9;
+        return num % 9;
+    }
 }
