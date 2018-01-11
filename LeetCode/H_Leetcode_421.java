@@ -33,6 +33,9 @@ public class H_Leetcode_421 {
      * then for each num i, try to always search for reversed bit (e.g. 0->1, 1->0) and xor with the found num j, which should be max xor pair for i.
      *
      * Time - O(n)
+     *
+     * number bits trie can be used to compare arbitrary two nums from a set of nums in bit by bit way.
+     * this solution construct trie from high significant bit to low significant bit, reversed way is also feasible.
      */
     public int findMaximumXOR(int[] nums) {
         for(int num : nums) add(num);
