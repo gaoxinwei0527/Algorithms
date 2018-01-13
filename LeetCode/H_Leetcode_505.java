@@ -1,5 +1,7 @@
 package LeetCode;
 
+import java.util.*;
+
 /**
  505. The Maze II
 
@@ -49,4 +51,72 @@ package LeetCode;
  The maze contains at least 2 empty spaces, and both the width and height of the maze won't exceed 100.
  */
 public class H_Leetcode_505 {
+    class Point{
+        public int x;
+        public int y;
+        public int val;
+        public Point(int x, int y, int val){
+            this.x = x;
+            this.y = y;
+            this.val = val;
+        }
+    }
+
+    Map<Integer, Point> map = new HashMap<>();
+    PriorityQueue<Point> q = new PriorityQueue<>((Point a, Point b) ->{
+        return a.val - b.val;
+    });
+
+    Set<Integer> visited = new HashSet<>();
+    int[][] direct = new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+
+    /**
+     * @param maze
+     * @param start
+     * @param dest
+     * @return
+     *
+     * Dijkstra algorithm
+     */
+    public int shortestDistance(int[][] maze, int[] start, int[] dest) {
+        int m = maze.length;
+        int n = maze[0].length;
+        Point s = new Point(start[0], start[1], 0);
+        q.offer(s);
+        map.put(start[0] * n + start[1], s);
+
+        while(!q.isEmpty()){
+            Point p = q.poll();
+            if(p.x == dest[0] && p.y == dest[1]) return p.val;
+            visited.add(p.x * n + p.y);
+
+            for(int k = 0; k < direct.length; k++){
+                int a = p.x;
+                int b = p.y;
+                while(a + direct[k][0] >= 0 && a + direct[k][0] < m && b + direct[k][1] >= 0 && b + direct[k][1] < n && maze[a + direct[k][0]][b + direct[k][1]] == 0){
+                    a += direct[k][0];
+                    b += direct[k][1];
+                }
+
+                int index = a * n + b;
+                if(!visited.contains(index)){
+                    if(map.containsKey(index)){
+                        Point tmp = map.get(index);
+                        int new_val = p.val + Math.abs(a - p.x) + Math.abs(b - p.y);
+                        if(tmp.val > new_val){
+                            tmp.val = new_val;
+                            q.remove(tmp);
+                            q.offer(tmp);
+                        }
+                    }else{
+                        Point new_p = new Point(a, b, p.val + Math.abs(a - p.x) + Math.abs(b - p.y));
+                        map.put(index, new_p);
+                        q.offer(new_p);
+                    }
+                }
+            }
+        }
+
+        return -1;
+    }
 }
