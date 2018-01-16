@@ -16,7 +16,7 @@ import java.util.Arrays;
  Credits:
  Special thanks to @porker2008 for adding this problem and creating all test cases.
  */
-public class H_Leetcode_164 {
+public class S_Leetcode_164 {
     /**
      * @param nums
      * @return
