@@ -17,7 +17,7 @@ import java.util.Random;
  Credits:
  Special thanks to @mithmatt for adding this problem and creating all test cases.
  */
-public class H_Leetcode_215 {
+public class S_Leetcode_215 {
     /**
      * @param nums
      * @param k
