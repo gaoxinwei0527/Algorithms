@@ -47,4 +47,19 @@ public class H_Leetcode_69 {
 
         return (int)(l - 1);
     }
+
+    /**
+     * @param x
+     * @return
+     *
+     * 牛顿法
+     */
+    public int mySqrt2(int x) {
+        long r = x;
+        while(r * r > x){
+            r = (r * r + x) / (2 * r);
+        }
+
+        return (int)r;
+    }
 }
