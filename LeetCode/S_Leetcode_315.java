@@ -19,7 +19,7 @@ import java.util.List;
  To the right of 1 there is 0 smaller element.
  Return the array [2, 1, 1, 0].
  */
-public class H_Leetcode_315 {
+public class S_Leetcode_315 {
     /**
      * @param nums
      * @return
