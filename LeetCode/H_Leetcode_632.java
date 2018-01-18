@@ -30,6 +30,8 @@ public class H_Leetcode_632 {
     Fastest way to get the new range with movement-
     1. compare the new pointer value with current max value, and update the max if necessary
     2. maintain min heap to keep updating min value
+
+    tip- use priority queue in this case, we can always know the left side (min value) from priority queue, the only thing we need to maintain is the right side (max value)
     */
     public int[] smallestRange(List<List<Integer>> nums) {
         int k = nums.size();
