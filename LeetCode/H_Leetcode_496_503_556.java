@@ -1,10 +1,11 @@
 package LeetCode;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
-public class H_Leetcode_496_503 {
+public class H_Leetcode_496_503_556 {
     /**
      496. Next Greater Element I
 
@@ -105,5 +106,49 @@ public class H_Leetcode_496_503 {
             res[st.pop()] = -1;
         }
         return res;
+    }
+
+    /**
+     556. Next Greater Element III
+
+     Given a positive 32-bit integer n, you need to find the smallest 32-bit integer which has exactly the same digits existing in the integer n and is greater in value than n. If no such positive 32-bit integer exists, you need to return -1.
+
+     Example 1:
+     Input: 12
+     Output: 21
+     Example 2:
+     Input: 21
+     Output: -1
+     */
+
+    /**
+     * @param n
+     * @return
+     *
+     * 1. find i where n[i] > n[i - 1]
+     * 2. find j where j >= i && j for minimal n[j] > n[i - 1]
+     * 3. swap n[i - 1] & n[j]
+     * 4. sort n[i ~ len-1]
+     */
+    public int nextGreaterElement(int n) {
+        char[] arr = Long.toString((long) n).toCharArray();
+
+        int i = arr.length - 1;
+        for(; i > 0; i--){
+            if(arr[i] > arr[i - 1]) break;
+        }
+
+        if(i == 0) return -1;
+
+        int j = i;
+        while(j + 1 < arr.length && arr[j + 1] > arr[i - 1]) j++;
+        char tmp = arr[i - 1];
+        arr[i - 1] = arr[j];
+        arr[j] = tmp;
+
+        Arrays.sort(arr, i, arr.length);
+        long res = Long.parseLong(new String(arr));
+        if(res > Integer.MAX_VALUE) return -1;
+        return (int) res;
     }
 }
