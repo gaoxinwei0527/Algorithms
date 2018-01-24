@@ -112,6 +112,14 @@ public class H_Leetcode_568 {
        }
 
     original problem- dp[0][0]
+
+    Tip: normally if we need to solve both two problems-
+    1. connectivity, is it some point reachable. In this case, if some city is reachable at some week.
+    2. optimized path, in this case, optimized schedule to maximize vacation.
+
+    Then we should consider backward induction. Because it doesn't need to track anything for connectivity,
+    if we can induce, means it's connected, otherwise not connected. Then we only need to track optimized path.
+    If we do forward induction, we need to track both, like we need to set dp[i][j] to -1 if it's not reachable..
     */
     public int maxVacationDays2(int[][] flights, int[][] days) {
         int N = flights.length;
