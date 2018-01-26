@@ -1,6 +1,6 @@
 package LeetCode;
 
-public class H_Leetcode_74_240 {
+public class M_Leetcode_74_240 {
     /**
      74. Search a 2D Matrix
 
@@ -30,7 +30,7 @@ public class H_Leetcode_74_240 {
      * Time - O(log(m * n))
      * Space - O(1)
      */
-    public boolean searchMatrix1(int[][] matrix, int target) {
+    public boolean searchMatrix(int[][] matrix, int target) {
         if(matrix.length == 0 || matrix[0].length == 0) return false;
         int m = matrix.length;
         int n = matrix[0].length;
@@ -38,15 +38,12 @@ public class H_Leetcode_74_240 {
         int r = m * n - 1;
 
         while(l <= r){
-            int mid = l + (r - l) / 2;
+            int mid = (l + r) >>> 1;
             int x = mid / n;
             int y = mid % n;
             if(matrix[x][y] == target) return true;
-            if(matrix[x][y] < target){
-                l = mid + 1;
-            }else{
-                r = mid - 1;
-            }
+            if(matrix[x][y] < target) l = mid + 1;
+            else r = mid - 1;
         }
 
         return false;
