@@ -56,4 +56,28 @@ public class L_Leetcode_63 {
 
         return obstacleGrid[m - 1][n - 1];
     }
+
+    /**
+     * @param obstacleGrid
+     * @return
+     *
+     * record last row, so no need to modify original matrix.
+     */
+    public int uniquePathsWithObstacles2(int[][] obstacleGrid) {
+        if(obstacleGrid.length == 0 || obstacleGrid[0].length == 0) return 1;
+        if(obstacleGrid[0][0] == 1) return 0;
+        int m = obstacleGrid.length;
+        int n = obstacleGrid[0].length;
+
+        int[] row = new int[n];
+        row[0] = 1;
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                if(obstacleGrid[i][j] == 1) row[j] = 0;
+                else if(j > 0) row[j] += row[j - 1];
+            }
+        }
+
+        return row[n - 1];
+    }
 }

@@ -14,7 +14,7 @@ import java.util.Set;
 
  Your algorithm should run in O(n) complexity.
  */
-public class H_Leetcode_128 {
+public class M_Leetcode_128 {
     /**
      * @param nums
      * @return
