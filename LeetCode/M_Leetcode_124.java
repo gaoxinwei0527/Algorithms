@@ -15,7 +15,7 @@ package LeetCode;
  2   3
  Return 6.
  */
-public class H_Leetcode_124 {
+public class M_Leetcode_124 {
     int max = Integer.MIN_VALUE;
 
     public class TreeNode {
