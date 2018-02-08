@@ -22,7 +22,7 @@ public class L_Leetcode_647 {
     /**
      * @param s
      * @return
-     * 
+     *
      * dp
      */
     public int countSubstrings(String s) {
