@@ -36,6 +36,12 @@ public class L_Leetcode_652 {
         TreeNode(int x) { val = x; }
     }
 
+    /**
+     * @param root
+     * @return
+     *
+     * serialize and count serialized strings
+     */
     public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
         List<TreeNode> res = new ArrayList<>();
         if(root == null) return res;
