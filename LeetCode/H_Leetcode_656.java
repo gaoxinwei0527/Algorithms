@@ -42,6 +42,8 @@ public class H_Leetcode_656 {
      *
      * Init- Tn = An
      * original problem - T(1);
+     *
+     * TODO- conclude parent pointers
      */
     public List<Integer> cheapestJump(int[] A, int B) {
         int N = A.length;
