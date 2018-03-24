@@ -8,7 +8,7 @@ import java.util.Map;
 
  Given n points on a 2D plane, find the maximum number of points that lie on the same straight line.
  */
-public class H_Leetcode_149 {
+public class M_Leetcode_149 {
     class Point {
         int x;
         int y;
