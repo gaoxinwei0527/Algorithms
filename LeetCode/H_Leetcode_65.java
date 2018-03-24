@@ -59,4 +59,74 @@ public class H_Leetcode_65 {
 
         return numberSeen && numberAfterE;
     }
+
+    /**
+     * @param s
+     * @return
+     *
+     * 1. handle the e firstly, then split s by 'e', then handle the two (or just one) parts separately
+     * 2. for each part, handle '+' / '-', then split remaining part by '.' (if any), then handle the substrings as pure numbers.
+     */
+    public boolean isNumber2(String s) {
+        s = s.trim();
+        char[] arr = s.toCharArray();
+        int len = arr.length;
+        if(len == 0) return false;
+
+        boolean e = false;
+        for(int i = 0; i < len; i++){
+            if(arr[i] != '.' && arr[i] != 'e' && arr[i] != '-' && arr[i] != '+' && (arr[i] < '0' || arr[i] > '9')) return false;
+            else if(arr[i] == 'e'){
+                if(e || i == 0 || i == len - 1) return false;
+                e = true;
+            }
+        }
+        if(!e) return isValid(s, false);
+        if(len == 1) return false;
+
+        String[] parts = s.split("e");
+        if(!isValid(parts[0], false)) return false;
+        if(!isValid(parts[1], true)) return false;
+
+        return true;
+    }
+
+    private boolean isValid(String p, boolean exp){
+        char[] arr = p.toCharArray();
+        int len = arr.length;
+
+        boolean dot = false;
+        for(int i = 0; i < len; i++){
+            if(arr[i] == '.'){
+                if(dot) return false;
+                dot = true;
+            }
+        }
+
+        if(dot && exp) return false;
+
+        int i = 0;
+        while(i < len && (arr[i] == '+' || arr[i] == '-')) i++;
+
+        if(i == len) return false;
+
+        p = p.substring(i);
+        if(!dot) return isValid2(p);
+        if(p.length() == 1) return false;
+
+        String[] parts = p.split("\\.");
+        for(String p2 : parts){
+            if(!isValid2(p2)) return false;
+        }
+
+        return true;
+    }
+
+    private boolean isValid2(String p){
+        char[] arr = p.toCharArray();
+        int i = 0;
+        int len = arr.length;
+        while(i < len && arr[i] >= '0' && arr[i] <= '9') i++;
+        return i == len;
+    }
 }

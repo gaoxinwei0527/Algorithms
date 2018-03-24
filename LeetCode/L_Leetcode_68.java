@@ -26,7 +26,7 @@ import java.util.List;
  ]
  Note: Each word is guaranteed not to exceed L in length.
  */
-public class M_Leetcode_68 {
+public class L_Leetcode_68 {
     /**
      * @param words
      * @param maxWidth
@@ -83,5 +83,59 @@ public class M_Leetcode_68 {
         }
 
         return res;
+    }
+
+    /**
+     * @param words
+     * @param maxWidth
+     * @return
+     *
+     * relatively module way
+     */
+    public List<String> fullJustify2(String[] words, int maxWidth) {
+        int i = 0;
+        int len = words.length;
+        List<String> res = new ArrayList<>();
+        while(i < len){
+            int j = i + 1;
+            int tmp = words[i].length();
+            while(j < len && (tmp + words[j].length() + 1 <= maxWidth)){
+                tmp += (words[j].length() + 1);
+                j++;
+            }
+
+            if(j == len) res.add(construct(words, i, j - 1, maxWidth, true));
+            else res.add(construct(words, i, j - 1, maxWidth, false));
+            i = j;
+        }
+
+        return res;
+    }
+
+    private String construct(String[] words, int i, int j, int L, boolean last){
+        StringBuilder sb = new StringBuilder();
+        sb.append(words[i]);
+        if(last || i == j){
+            for(int k = i + 1; k <= j; k++) sb.append(" ").append(words[k]);
+            while(sb.length() < L) sb.append(" ");
+        }else{
+            int wordLen = 0;
+            for(int k = i; k <= j; k++) wordLen += words[k].length();
+
+            int extra = L - wordLen - (j - i);
+            int even = extra / (j - i);
+            int left = extra % (j - i);
+            for(int k = i + 1; k <= j; k++){
+                sb.append(" ");
+                for(int m = 0; m < even; m++) sb.append(" ");
+                if(left > 0){
+                    sb.append(" ");
+                    left--;
+                }
+                sb.append(words[k]);
+            }
+        }
+
+        return sb.toString();
     }
 }
