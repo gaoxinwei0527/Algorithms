@@ -70,4 +70,48 @@ public class M_Leetcode_76 {
 
         return true;
     }
+
+    /**
+     * @param s
+     * @param t
+     * @return
+     *
+     * use int[] as hashmap.
+     */
+    public String minWindow2(String s, String t) {
+        if(s.length() == 0 || t.length() == 0) return "";
+        int[] count = new int[128];
+        char[] arr1 = s.toCharArray();
+        char[] arr2 = t.toCharArray();
+
+        for(char c : arr2) count[(int) c]++;
+        int size = Integer.MAX_VALUE;
+        int x = -1;
+        int y = -1;
+        int i = -1;
+        int j = 0;
+        while(j < arr1.length){
+            if(i != -1) count[(int) arr1[i]]++;
+            i++;
+            while(!check(count) && j < arr1.length) count[(int) arr1[j++]]--;
+            if(!check(count)) break;
+            while(count[(int) arr1[i]] < 0) count[(int) arr1[i++]]++;
+            if(j - i < size){
+                x = i;
+                y = j;
+                size = j - i;
+            }
+        }
+
+        if(size == Integer.MAX_VALUE) return "";
+        return s.substring(x, y);
+    }
+
+    private boolean check(int[] count){
+        for(int i : count){
+            if(i > 0) return false;
+        }
+
+        return true;
+    }
 }
