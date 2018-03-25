@@ -1,5 +1,6 @@
 package LeetCode;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,21 +37,18 @@ public class M_Leetcode_57 {
      * Space - O(1)
      */
     public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
-        List<Interval> result = new LinkedList<>();
+        List<Interval> res = new ArrayList<>();
         int i = 0;
-        // add all the intervals ending before newInterval starts
-        while (i < intervals.size() && intervals.get(i).end < newInterval.start)
-            result.add(intervals.get(i++));
-        // merge all overlapping intervals to one considering newInterval
-        while (i < intervals.size() && intervals.get(i).start <= newInterval.end) {
-            newInterval = new Interval( // we could mutate newInterval here also
-                    Math.min(newInterval.start, intervals.get(i).start),
-                    Math.max(newInterval.end, intervals.get(i).end));
+        int n = intervals.size();
+        while(i < n && intervals.get(i).end < newInterval.start) res.add(intervals.get(i++));
+        while(i < n && intervals.get(i).start <= newInterval.end){
+            newInterval.start = Math.min(newInterval.start, intervals.get(i).start);
+            newInterval.end = Math.max(newInterval.end, intervals.get(i).end);
             i++;
         }
-        result.add(newInterval); // add the union of intervals we got
-        // add all the rest
-        while (i < intervals.size()) result.add(intervals.get(i++));
-        return result;
+
+        res.add(newInterval);
+        while(i < n) res.add(intervals.get(i++));
+        return res;
     }
 }
