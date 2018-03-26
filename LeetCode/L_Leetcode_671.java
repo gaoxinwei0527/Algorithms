@@ -64,4 +64,28 @@ public class L_Leetcode_671 {
         if(right == -1) return left;
         return (left < right ? left : right);
     }
+
+    /**
+     * @param root
+     * @return
+     *
+     * another recursive way
+     */
+    public int findSecondMinimumValue2(TreeNode root) {
+        if(root == null) return -1;
+        if(root.left == null && root.right == null) return -1;
+        int a = -1;
+        if(root.left != null){
+            a = (root.left.val == root.val ? findSecondMinimumValue(root.left) : root.left.val);
+        }
+
+        int b = -1;
+        if(root.right != null){
+            b = (root.right.val == root.val ? findSecondMinimumValue(root.right) : root.right.val);
+        }
+
+        if(a == -1) return b;
+        if(b == -1) return a;
+        return Math.min(a, b);
+    }
 }

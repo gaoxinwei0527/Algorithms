@@ -18,7 +18,7 @@ package LeetCode;
  The input array size is in the range of [1, 20000].
  n is a non-negative integer which won't exceed the input array size.
  */
-public class M_Leetcode_605 {
+public class L_Leetcode_605 {
     /**
      * @param flowerbed
      * @param n
