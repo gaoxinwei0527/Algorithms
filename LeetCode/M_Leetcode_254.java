@@ -40,7 +40,7 @@ import java.util.List;
  [4, 8]
  ]
  */
-public class H_Leetcode_254 {
+public class M_Leetcode_254 {
     /**
      * @param n
      * @return

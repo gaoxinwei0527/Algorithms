@@ -22,7 +22,7 @@ import java.util.Stack;
  3   1
  confused what "{1,#,2,3}" means? > read more on how binary tree is serialized on OJ.
  */
-public class H_Leetcode_156 {
+public class M_Leetcode_156 {
     public class TreeNode {
         int val;
         TreeNode left;

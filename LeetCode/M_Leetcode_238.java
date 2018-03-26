@@ -12,7 +12,7 @@ package LeetCode;
  Follow up:
  Could you solve it with constant space complexity? (Note: The output array does not count as extra space for the purpose of space complexity analysis.)
  */
-public class H_Leetcode_238 {
+public class M_Leetcode_238 {
     /**
      * @param nums
      * @return
