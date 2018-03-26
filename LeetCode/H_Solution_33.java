@@ -11,7 +11,7 @@ package LeetCode;
 
  You may assume no duplicate exists in the array.
  */
-public class M_Solution_33 {
+public class H_Solution_33 {
     /**
      * @param nums
      * @param target
@@ -19,6 +19,12 @@ public class M_Solution_33 {
      *
      * Binary search, but need to decide the mid position.
      * For binary search, if we are doing exact matching, like find target in array, we can do while(l <= r);
+     *
+     * The trick is-
+     * 1. when nums[m] < target, normal binary search will go right half, and the only chance to go left half here is 'm'
+     * is at rotated right part and nums[r] < target.
+     * 2. when nums[m] > target, normal binary search will go left half, and the only chance to go right half here is 'm'
+     * is at rotated left part and nums[l] > target.
      *
      * Time - O(logN)
      * Space - O(1)

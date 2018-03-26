@@ -13,7 +13,7 @@ package LeetCode;
  Given [5, 7, 7, 8, 8, 10] and target value 8,
  return [3, 4].
  */
-public class M_Solution_34 {
+public class L_Solution_34 {
     /**
      * @param nums
      * @param target
