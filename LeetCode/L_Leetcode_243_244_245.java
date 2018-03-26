@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class M_Leetcode_243_244_245 {
+public class L_Leetcode_243_244_245 {
 
     /**
      243. Shortest Word Distance
