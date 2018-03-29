@@ -40,7 +40,7 @@ import java.util.Map;
  What is the time complexity of your modified solution? What is the most time-consuming part and memory consuming part of it? How to optimize?
  How to make sure the duplicated files you find are not false positive?
  */
-public class L_Leetcode_609 {
+public class LL_Leetcode_609 {
     public List<List<String>> findDuplicate(String[] paths) {
         Map<String, List<String>> map = new HashMap<>();
         for(String path : paths){
