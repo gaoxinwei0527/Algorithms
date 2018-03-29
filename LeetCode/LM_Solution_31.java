@@ -1,5 +1,7 @@
 package LeetCode;
 
+import java.util.Arrays;
+
 /**
  31. Next Permutation
 
@@ -14,7 +16,7 @@ package LeetCode;
  3,2,1 → 1,2,3
  1,1,5 → 1,5,1
  */
-public class M_Solution_31 {
+public class LM_Solution_31 {
     /**
      * @param nums
      *
@@ -30,34 +32,24 @@ public class M_Solution_31 {
      * Space - O(1)
      */
     public void nextPermutation(int[] nums) {
-        int i = nums.length - 1;
-        while(i > 0 && nums[i - 1] >= nums[i]){
-            i--;
-        }
-
+        int n = nums.length;
+        int i = n - 1;
+        while(i > 0 && nums[i - 1] >= nums[i]) i--;
         if(i == 0) {
-            reverse(nums, 0, nums.length - 1);
+            Arrays.sort(nums);
             return;
         }
 
-        int tmp = nums[i - 1];
-        int j = i;
-        while(j < nums.length - 1 && nums[j + 1] > tmp){
-            j++;
-        }
-
-        nums[i - 1] = nums[j];
-        nums[j] = tmp;
-        reverse(nums, i, nums.length - 1);
+        int a = i - 1;
+        while(i < n && nums[i] > nums[a]) i++;
+        int b = i - 1;
+        swap(nums, a, b);
+        Arrays.sort(nums, a + 1, n);
     }
 
-    private void reverse(int[] nums, int a, int b){
-        while(a < b){
-            int tmp = nums[a];
-            nums[a] = nums[b];
-            nums[b] = tmp;
-            a++;
-            b--;
-        }
+    private void swap(int[] nums, int i, int j){
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
     }
 }
