@@ -20,7 +20,7 @@ package LeetCode;
  /   /
  -10  5
  */
-public class L_Leetcode_109 {
+public class LL_Leetcode_109 {
     public class ListNode {
         int val;
         ListNode next;

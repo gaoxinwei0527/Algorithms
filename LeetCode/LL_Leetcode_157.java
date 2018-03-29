@@ -12,7 +12,7 @@ package LeetCode;
  Note:
  The read function will only be called once for each test case.
  */
-public class L_Leetcode_157 {
+public class LL_Leetcode_157 {
     class Reader4{
         /* The read4 API is defined in the parent class Reader4.*/
         int read4(char[] buf){return 0;}

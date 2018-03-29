@@ -38,7 +38,7 @@ package LeetCode;
  /
  1
  */
-public class L_Leetcode_669 {
+public class LL_Leetcode_669 {
     public class TreeNode {
         int val;
         TreeNode left;
