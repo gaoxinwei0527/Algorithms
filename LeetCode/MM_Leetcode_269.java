@@ -44,7 +44,7 @@ import java.util.*;
  If the order is invalid, return an empty string.
  There may be multiple valid order of letters, return any one of them is fine.
  */
-public class M_Leetcode_269 {
+public class MM_Leetcode_269 {
     /**
      * @param words
      * @return

@@ -5,7 +5,7 @@ package LeetCode;
 
  Write a function to find the longest common prefix string amongst an array of strings.
  */
-public class L_Solution_14 {
+public class LL_Solution_14 {
     /**
      * @param strs
      * @return
